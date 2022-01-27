@@ -16,24 +16,16 @@
 			</div>
 		</div>
 		<div class="infoAndControls">
-			<div class="setLevelButtons">
-				<RadioInput
-					flex_row
-					:name="languageButtons.name"
-					:buttons="languageButtons.buttons"
-					:defaultValue="languageButtons.value"
-					@update-input-data="setLanguage"
-				/>
-			</div>
+
 			<p v-if="!isUserFail"
 				class="roundNumber">
-				{{languagesLocales.round}}: {{roundNumber}}
+				Раунд: {{roundNumber}}
 			</p>
 			<div @click="startTheGame">
 				<Button v-if="!isGameOn"
 					type="button"
 					filled
-					:label="languagesLocales.startTheGameButtonLabel"/>
+					label="Начать новую игру"/>
 			</div>
 			<p v-if="isUserFail"
 				class="lossAlert">
@@ -44,7 +36,7 @@
 					:disabled="isHighlighting"
 					type="button"
 					hollow
-					:label="languagesLocales.repeatHighlightButtonLabel"/>
+					label="Повтори последовательность"/>
 			</div>
 			<div class="setLevelButtons">
 				<RadioInput
@@ -55,12 +47,6 @@
 					:defaultValue="levelButtons.value"
 					@update-input-data="setLevel"
 				/>
-			</div>
-			<div @click="tryLostRound">
-				<Button v-if="isUserFail"
-					type="button"
-					hollow
-					:label="languagesLocales.tryLostRoundButtonLabel"/>
 			</div>
 		</div>
 	</div>
@@ -83,21 +69,12 @@ export default {
 	},
 	data() {
 		return {
-			language: 'ru',
-			languageButtons: {
-				name: 'language',
-				value: 'ru',
-				buttons: [
-					{
-						name: 'ru',
-						nameLocale: 'Русский'
-					},
-					{
-						name: 'en',
-						nameLocale: 'English'
-					}
-				]
+			levels: {
+				easy: 'легко',
+				medium: 'средне',
+				hard: 'сложно'
 			},
+
 			sectorsInit: [
 				{
 					id: 0,
@@ -134,28 +111,14 @@ export default {
 		}
 	},
 	computed: {
-		languagesLocales() {
-			const {languageButtons, roundNumber} = this;
-			switch(languageButtons.value) { 
-				default: return {
-					round: 'Раунд',
-					startTheGameButtonLabel: 'Начать новую игру',
-					youLostAlert: `Вы проиграли в ${roundNumber} раунде`,
-					tryLostRoundButtonLabel: 'Попробовать раунд ещё раз',
-					repeatHighlightButtonLabel: 'Повторить последовательность',
-					levels: {
-						easy: 'легко',
-						medium: 'средне',
-						hard: 'сложно'
-					},
-				}
-			}
+		youLostAlert() {
+				return `Вы проиграли в ${this.roundNumber} раунде`
 		},
 		levelButtons() {
 			return {
 				name: 'level',
 				value: 'easy',
-				buttons: Object.entries(this.languagesLocales.levels).map(level => {
+				buttons: Object.entries(this.levels).map(level => {
 				const [name, nameLocale] = level
 				return ({
 					name: name,
