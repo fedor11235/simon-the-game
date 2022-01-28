@@ -69,6 +69,7 @@ export default {
 	},
 	data() {
 		return {
+			level: 'easy',
 			levels: {
 				easy: 'легко',
 				medium: 'средне',
