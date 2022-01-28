@@ -29,14 +29,14 @@
 			</div>
 			<p v-if="isUserFail"
 				class="lossAlert">
-				{{languagesLocales.youLostAlert}}
+				Вы проиграли в {{roundNumber}} раунде
 			</p>
 			<div @click="repeatHighlight">
 				<Button v-if="isGameOn"
 					:disabled="isHighlighting"
 					type="button"
 					hollow
-					label="Повтори последовательность"/>
+					label="Повторить последовательность"/>
 			</div>
 			<div class="setLevelButtons">
 				<RadioInput
@@ -74,7 +74,6 @@ export default {
 				medium: 'средне',
 				hard: 'сложно'
 			},
-
 			sectorsInit: [
 				{
 					id: 0,
@@ -98,7 +97,6 @@ export default {
 				},
 			],
 			roundNumber: 0,
-			level: 'easy',
 			isGameOn: false,
 			isUserFail: false,
 			isHighlighting: false,
@@ -111,9 +109,7 @@ export default {
 		}
 	},
 	computed: {
-		youLostAlert() {
-				return `Вы проиграли в ${this.roundNumber} раунде`
-		},
+		
 		levelButtons() {
 			return {
 				name: 'level',
@@ -151,9 +147,6 @@ export default {
 		},
 	},
 	methods: {
-		setLanguage(value) {
-			this.languageButtons.value = value;
-		},
 		playAudio(index) {
 			const audio = new Audio(this.audiosArray[index])
 			audio.play()
@@ -260,10 +253,10 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-$firstSector_color: #BC9CFF
-$secondSector_color: #6FCF97
-$thirdSector_color: #ffa088
-$fourthSector_color: #f884fc
+$firstSector_color: dodgerblue
+$secondSector_color: #FF5643
+$thirdSector_color: #BEDE15
+$fourthSector_color: #FEEF33
 
 .simonGameWrap 
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0)
@@ -279,11 +272,8 @@ $fourthSector_color: #f884fc
 	
 	.simonCircleWrap 
 		min-width: 300px
-		max-width: 300px
-		max-height: 300px
 		min-height: 300px
 		border: 4px solid white
-		box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.55)
 		border-radius: 50%
 		position: relative
 		cursor: pointer
@@ -293,7 +283,7 @@ $fourthSector_color: #f884fc
 			border-radius: inherit
 			width: 100%
 			height: 100%
-			opacity: 0.7
+			opacity: 0.6
 			&_first 
 				clip-path: polygon(50% 0%, 50% 50%, 0 50%, 0 0)
 				background-color: $firstSector_color
@@ -315,8 +305,6 @@ $fourthSector_color: #f884fc
 			
 			&:hover 
 				opacity: 1
-				@media (hover: none) 
-					opacity: 0.7
 				
 	.beingHighlighted 
 		.sector 

@@ -6,7 +6,6 @@
 				requiredAlert_error: didSubmitAttempt &&
 					!value
 			}">
-			Это поле обязательно для заполнения
 		</p>
 		<div class="buttonsWrap"
 			:class="{
@@ -84,21 +83,10 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-$gradientColor: #8BA4F9
-$softErrorText: rgb(250, 98, 255)
-$darkShadeColor: #1f2041
-$primaryColor: #BC9CFF
-$text_primary: transparentize($darkShadeColor, 0.25)
+$primaryColor: dodgerblue
 
 .radioButtonsWrap 
-	.requiredAlert 
-		margin-bottom: 2px
-		color: $gradientColor
-		line-height: 20px
-		&_error 
-			color: $softErrorText
 		
-	
 	.buttonsWrap 
 		display: flex
 		&_flex-row 
@@ -112,8 +100,8 @@ $text_primary: transparentize($darkShadeColor, 0.25)
 			cursor: pointer
 			display: flex 
 			align-items: center
-			font-size: 14px
-			color: $text_primary
+			color: $primaryColor
+			opacity: 0.6
 			.button 
 				cursor: inherit
 				-webkit-appearance: unset
@@ -131,7 +119,7 @@ $text_primary: transparentize($darkShadeColor, 0.25)
 					margin-right: 10px
 					width: 18px 
 					height: 18px
-					border: 1px solid transparentize($darkShadeColor, 0.75)
+					border: 1px solid transparentize($primaryColor, 0.75)
 					border-radius: 10px
 				
 				&:checked::before 
@@ -144,17 +132,8 @@ $text_primary: transparentize($darkShadeColor, 0.25)
 					cursor: inherit
 					width: 12px
 					height: 12px
-					background: linear-gradient(180deg, $primaryColor 0%, #8BA4F9 100%)
+					background-color: $primaryColor
 					border-radius: 50%
 					top: calc(50% - 6px)
-					right: calc(50% - 6px)
-				
-			&_disabled 
-				opacity: 0.6
-				cursor: default
-			
-			&_error 
-				color: $softErrorText
-				.button::before 
-					border-color: $softErrorText
+					right: calc(50% - 6px)		
 </style>
