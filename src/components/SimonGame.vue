@@ -126,9 +126,9 @@ export default {
 		timeout() {
 			switch(this.level) {
 				case 'easy': return 1.5
-				case 'medium': return 1;
-				case 'hard': return 0.4;
-				default: return 1.5;
+				case 'medium': return 1
+				case 'hard': return 0.4
+				default: return 1.5
 			}
 		},
 		sectors() {
